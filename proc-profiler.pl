@@ -64,7 +64,7 @@ for (; $i < $count; $i++) {
 			$func =~ s/\+.*//;
 			unshift @stack, $func;
 		}
-		my $folded = join ";", @stack;
+		my $folded = join "/", @stack;
 		$stacks{$folded}++;
 	}
 	select(undef, undef, undef, $interval);
@@ -72,5 +72,5 @@ for (; $i < $count; $i++) {
 DONE:
 
 foreach my $folded (sort {$stacks{$b} <=> $stacks{$a}} keys %stacks) {
-	print "$folded $stacks{$folded}\n";
+	print "$stacks{$folded}\t$folded/SELF\n";
 }
